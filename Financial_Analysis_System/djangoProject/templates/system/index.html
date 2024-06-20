@@ -1,0 +1,38 @@
+{% extends "base.html" %}{% load static %}
+{% block title %}首页{% endblock %}
+{% block style %}
+    <style>
+        .index {
+            padding-top: 350px;
+            display: flex;
+            justify-content: center;
+            background-image: url('{% static "images/bg2.jpg" %}'); /* 添加背景图片 */
+            background-size: cover; /* 确保图片覆盖整个元素 */
+            background-position: center; /* 图片居中显示 */
+        }
+
+        .index a {
+            margin: auto;
+        }
+
+        .btn {
+        font-size: 18px; /* 增大字体大小 */
+        padding: 20px 40px; /* 增加内边距，使按钮看起来更大 */
+        border-radius: 8px; /* 增加边角的圆滑度 */
+    }
+
+    </style>
+{% endblock %}
+{% block content %}
+    <div class="index">
+        <a href="{% url 'system:cash_flow_chart' %}">
+            <button type="button" class="btn btn-primary">&nbsp;&nbsp;&nbsp;企业营收数据内容&nbsp;&nbsp;&nbsp;</button>
+        </a>
+        <a href="{% url 'system:chart2' %}">
+            <button type="button" class="btn btn-success">&nbsp;&nbsp;&nbsp;每股收益分布&nbsp;&nbsp;&nbsp;</button>
+        </a>
+        <a href="{% url 'system:show' %}">
+            <button type="button" class="btn btn-warning">&nbsp;&nbsp;&nbsp;Echarts展示&nbsp;&nbsp;&nbsp;</button>
+        </a>
+    </div>
+{% endblock %}

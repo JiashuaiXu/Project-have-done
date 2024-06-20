@@ -1,0 +1,63 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>{% block title %}{% endblock %}</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css">
+    <link rel="stylesheet" href="{% static 'layui/css/layui.css' %}">
+    <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"></script>
+    <script src="{% static 'layer/src/layer.js' %}"></script>
+    <script src="{% static 'layui/layui.js' %}"></script>
+    <script src="https://cdn.bootcdn.net/ajax/libs/echarts/5.4.2/echarts.min.js"></script>
+</head>
+<body>
+{% block style %}{% endblock style %}
+{% include 'header.html' %}
+<div id="wrapper">
+    {% block content %}{% endblock content %}
+    <div id="push"></div>
+</div>
+{% include 'footer.html' %}
+{% block script %}{% endblock script %}
+{% include 'back_to_top_func.html' %}
+{#<style>#}
+{#    html, body {#}
+{#        height: 100%;#}
+{#        margin: 0;#}
+{#    }#}
+{##}
+{#    #wrapper {#}
+{#        min-height: 100%;#}
+{#        margin-bottom: -60px;#}
+{#        background-color: #faf9f9;#}
+{#    }#}
+{##}
+{#    #push {#}
+{#        height: 60px;#}
+{#    }#}
+{#</style>#}
+<style>
+    html, body {
+        height: 100%;
+        margin: 0;
+        background-image: url('{% static "images/bg2.jpg" %}'); /* 添加背景图片 */
+        background-size: cover; /* 确保图片覆盖整个元素 */
+        background-position: center; /* 图片居中显示 */
+        background-attachment: fixed; /* 背景图片固定，不随滚动条滚动 */
+    }
+
+    #wrapper {
+        min-height: 100%;
+        position: relative; /* 为了确保底部推送正确工作 */
+        margin-bottom: -60px; /* 底部推送技巧 */
+    }
+
+    #push, #footer {
+        height: 60px; /* 确保底部和推送有足够空间 */
+    }
+</style>
+
+</body>
+</html>

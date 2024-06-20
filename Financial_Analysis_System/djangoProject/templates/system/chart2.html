@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chart 2 - Earnings Data Distribution</title>
+    <!-- Include any necessary CSS or JavaScript libraries here -->
+</head>
+<body>
+    <h1>Earnings Data Distribution</h1>
+    <p>This chart illustrates the distribution of basic earnings per share.</p>
+
+    <!-- Display the chart using HTML elements or integrate with a JavaScript charting library -->
+
+    <!-- Display the bins and corresponding counts -->
+    <ul>
+        {% for index, bin_name in enumerate(bin_names) %}
+            <li>{{ bin_name }}: {{ counts[index] }}</li>
+        {% endfor %}
+    </ul>
+
+    <!-- Option to go back to the homepage or other actions -->
+    <a href="{% url 'homepage' %}">Go back to homepage</a>
+
+    <!-- Include any necessary JavaScript for interactivity or chart rendering -->
+</body>
+</html>

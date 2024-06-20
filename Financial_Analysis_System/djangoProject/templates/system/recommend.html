@@ -1,0 +1,195 @@
+
+{#<script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>#}
+{##}
+{#<script>#}
+{#    // 使用 ApexCharts 绘制图表#}
+    {#var bin_names = {{ bin_names|safe }};#}
+    {#var counts = {{ counts|safe }};#}
+{#    var bin_names = ["0.07-0.27", "0.27-0.47", "0.47-0.66", "0.66-0.86"];#}
+{#    var counts = [17, 15, 12, 10];#}
+{##}
+{##}
+{#    var options = {#}
+{#        chart: {#}
+{#            type: 'bar',#}
+{#            height: 350,#}
+{#            width: '100%'#}
+{#        },#}
+{#        plotOptions: {#}
+{#            bar: {#}
+{#                horizontal: true,#}
+{#                distributed: true#}
+{#            }#}
+{#        },#}
+{#        dataLabels: {#}
+{#            enabled: false#}
+{#        },#}
+{#        xaxis: {#}
+{#            categories: bin_names#}
+{#        },#}
+{#        title: {#}
+{#            text: '每股收益分布图'#}
+{#        }#}
+{#    };#}
+{##}
+{#    var chart = new ApexCharts(document.querySelector("#chart-container"), options);#}
+{#    chart.render();#}
+{#</script>#}
+{#==================================================#}
+{##}
+{##}
+{#{% extends "base.html" %}#}
+{#{% load static %}#}
+{##}
+{#{% block title %}每股收益分布{% endblock %}#}
+{##}
+{#{% block style %}#}
+{#<style>#}
+{#    /* 添加你需要的样式 */#}
+{#    .container {#}
+{#        padding-top: 50px;#}
+{#        text-align: center;#}
+{#    }#}
+{##}
+{#    .card {#}
+{#        width: 80%;#}
+{#        margin: 0 auto;#}
+{#    }#}
+{##}
+{#    #chart-container {#}
+{#        height: 400px;#}
+{#        margin-top: 20px;#}
+{#    }#}
+{#</style>#}
+{#{% endblock %}#}
+{##}
+{#{% block content %}#}
+{#<div class="container">#}
+{#    <div class="row">#}
+{#        <div class="col-md-12">#}
+{#            <div class="card">#}
+{#                <div class="card-body">#}
+{#                    <h5 class="card-title">每股收益分布情况</h5>#}
+{#                    <div id="chart-container"></div>#}
+{#                      <canvas id="chart-container"></canvas>#}
+{##}
+{#                </div>#}
+{#            </div>#}
+{#        </div>#}
+{#    </div>#}
+{#</div>#}
+{#<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>#}
+{##}
+{#    <script>#}
+{#    // 使用 Chart.js 绘制图表#}
+{#    var ctx = document.getElementById('chart-container').getContext('2d');#}
+{#    var myChart = new Chart(ctx, {#}
+{#        type: 'bar',#}
+{#        data: {#}
+{#            labels: ["0.07-0.27", "0.27-0.47", "0.47-0.66", "0.66-0.86"],#}
+{#            datasets: [{#}
+{#                label: '每股收益分布',#}
+{#                data: [17, 15, 12, 10],#}
+{#                backgroundColor: [#}
+{#                    'rgba(255, 99, 132, 0.2)',#}
+{#                    'rgba(54, 162, 235, 0.2)',#}
+{#                    'rgba(255, 206, 86, 0.2)',#}
+{#                    'rgba(75, 192, 192, 0.2)'#}
+{#                ],#}
+{#                borderColor: [#}
+{#                    'rgba(255, 99, 132, 1)',#}
+{#                    'rgba(54, 162, 235, 1)',#}
+{#                    'rgba(255, 206, 86, 1)',#}
+{#                    'rgba(75, 192, 192, 1)'#}
+{#                ],#}
+{#                borderWidth: 1#}
+{#            }]#}
+{#        },#}
+{#        options: {#}
+{#            indexAxis: 'y', // 使条形图水平显示#}
+{#            scales: {#}
+{#                x: {#}
+{#                    beginAtZero: true#}
+{#                }#}
+{#            }#}
+{#        }#}
+{#    });#}
+{#</script>#}
+{#{% endblock %}#}
+{#==============================================#}
+
+{% extends "base.html" %}
+{% load static %}
+
+{% block title %}每股收益分布{% endblock %}
+
+{% block style %}
+<style>
+    /* 添加你需要的样式 */
+    .container {
+        padding-top: 50px;
+        text-align: center;
+    }
+
+    .card {
+        width: 80%;
+        margin: 0 auto;
+    }
+
+    #chart-container {
+        height: 400px;
+        margin-top: 20px;
+    }
+</style>
+{% endblock %}
+
+{% block content %}
+<div class="container">
+    <div class="row">
+        <div class="col-md-12">
+            <div class="card">
+                <div class="card-body">
+                    <h5 class="card-title">每股收益分布情况</h5>
+                    <canvas id="chart-container"></canvas>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script>
+    // 使用 Chart.js 绘制图表
+    var ctx = document.getElementById('chart-container').getContext('2d');
+    var myChart = new Chart(ctx, {
+        type: 'bar',
+        data: {
+            labels: {{ bin_names|safe }},
+            datasets: [{
+                label: '每股收益分布',
+                data: {{ counts|safe }},
+                backgroundColor: [
+                    'rgba(255, 99, 132, 0.2)',
+                    'rgba(54, 162, 235, 0.2)',
+                    'rgba(255, 206, 86, 0.2)',
+                    'rgba(75, 192, 192, 0.2)'
+                ],
+                borderColor: [
+                    'rgba(255, 99, 132, 1)',
+                    'rgba(54, 162, 235, 1)',
+                    'rgba(255, 206, 86, 1)',
+                    'rgba(75, 192, 192, 1)'
+                ],
+                borderWidth: 1
+            }]
+        },
+        options: {
+            indexAxis: 'y', // 使条形图水平显示
+            scales: {
+                x: {
+                    beginAtZero: true
+                }
+            }
+        }
+    });
+</script>
+{% endblock %}
